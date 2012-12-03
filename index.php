@@ -107,7 +107,7 @@ if (defined('ENVIRONMENT'))
 
 
 
-define('YII_DEV_ENV', $_SERVER['SERVER_ADDR'] != '127.0.0.1' ? 'remote' : 'local'); 
+define('YII_DEV_ENV', in_array($_SERVER['SERVER_ADDR'], array('127.0.0.1', '::1') ? 'local' : 'remote'); 
 
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/lib/yii/yii.php';

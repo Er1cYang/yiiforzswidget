@@ -5,9 +5,12 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
-return array(
+$config = array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'My Web Application',
+	'language' => 'zh_cn',
+	'timeZone' => 'Asia/Chongqing',
+	
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -32,12 +35,16 @@ return array(
 
 	// application components
 	'components'=>array(
+		
+		'request' => array(
+		),
+
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
 		// uncomment the following to enable URLs in path-format
-		/*
+		
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'rules'=>array(
@@ -46,12 +53,10 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		*/
-		'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		),
+		
+		
 		// uncomment the following to use a MySQL database
-		/*
+		
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
 			'emulatePrepare' => true,
@@ -59,7 +64,7 @@ return array(
 			'password' => '',
 			'charset' => 'utf8',
 		),
-		*/
+		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
@@ -88,3 +93,25 @@ return array(
 		'adminEmail'=>'webmaster@example.com',
 	),
 );
+
+
+// 如果是远程环境（指zs），加载特定的配置文件，一般情况下无需修改。
+if(YII_DEV_ENV == 'remote') {
+	$config['components']['request']['baseUrl'] = '';
+	$config['components']['urlManager']['showScriptName'] = false;
+	include dirname(__FILE__).'/../../application/config/database.php';
+	
+	$yiiDbConfig = array(
+		'connectionString' => 
+			'mysql:host='.$db['default']['hostname'].
+			';dbname='.$db['default']['database'].
+			';port='.$db['default']['port'],
+		'emulatePrepare' => true,
+		'username' => $db['default']['username'],
+		'password' => $db['default']['password'],
+		'charset' => $db['default']['char_set'],
+	);
+	$config['components']['db'] = $yiiDbConfig;
+}
+
+return $config;

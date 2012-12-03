@@ -4,7 +4,7 @@ $system_path = 'system';
 $application_folder = 'application';
 
 /** 
- * Ê±Çøtimezone set
+ * æ—¶åŒºtimezone set
  */
 ini_set ('date.timezone', 'Asia/Shanghai');
 

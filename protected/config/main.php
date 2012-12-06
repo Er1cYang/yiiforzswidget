@@ -95,7 +95,7 @@ $config = array(
 );
 
 
-// Èç¹ûÊÇÔ¶³Ì»·¾³£¨Ö¸zs£©£¬¼ÓÔØÌØ¶¨µÄÅäÖÃÎÄ¼ş£¬Ò»°ãÇé¿öÏÂÎŞĞèĞŞ¸Ä¡£
+// å¦‚æœæ˜¯è¿œç¨‹ç¯å¢ƒï¼ˆæŒ‡zsï¼‰ï¼ŒåŠ è½½ç‰¹å®šçš„é…ç½®æ–‡ä»¶ï¼Œä¸€èˆ¬æƒ…å†µä¸‹æ— éœ€ä¿®æ”¹ã€‚
 if(YII_DEV_ENV == 'remote') {
 	$config['components']['request']['baseUrl'] = '';
 	$config['components']['urlManager']['showScriptName'] = false;

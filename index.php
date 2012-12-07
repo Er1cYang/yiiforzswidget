@@ -106,7 +106,7 @@ if (defined('ENVIRONMENT'))
 	}
 
 
-
+//part of yii
 define('YII_DEV_ENV', in_array($_SERVER['SERVER_ADDR'], array('127.0.0.1', '::1')) ? 'local' : 'remote');
 
 $dir = dirname(__FILE__);

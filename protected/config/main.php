@@ -22,6 +22,9 @@ $config = array(
 	),
 
 	'modules'=>array(
+		'zaetool' => array(
+			'class' => 'hay.zae.modules.zaetool.ZZaeToolModule',
+		),
 		// uncomment the following to enable the Gii tool
 		/*
 		'gii'=>array(
@@ -99,8 +102,12 @@ $config = array(
 if(YII_DEV_ENV == 'remote') {
 	$config['components']['request']['baseUrl'] = '';
 	$config['components']['urlManager']['showScriptName'] = false;
-	include dirname(__FILE__).'/../../application/config/database.php';
 	
+	// 删除gii和zaetool模块
+	unset($config['modules']['gii'], $config['modules']['zaetool']);
+	
+	// 加载zae的数据库配置文件
+	include dirname(__FILE__).'/../../application/config/database.php';
 	$yiiDbConfig = array(
 		'connectionString' => 
 			'mysql:host='.$db['default']['hostname'].
@@ -111,7 +118,10 @@ if(YII_DEV_ENV == 'remote') {
 		'password' => $db['default']['password'],
 		'charset' => $db['default']['char_set'],
 	);
-	$config['components']['db'] = $yiiDbConfig;
+	$config['components']['db'] = array_merge(
+		$config['components']['db'], 
+		$yiiDbConfig
+	);
 }
 
 return $config;

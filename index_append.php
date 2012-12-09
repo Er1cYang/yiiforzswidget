@@ -1,5 +1,5 @@
 <?php
-//part of yii
+// 检测开发环境
 define('YII_DEV_ENV', in_array($_SERVER['SERVER_ADDR'], array('127.0.0.1', '::1')) ? 'local' : 'remote');
 
 $dir = dirname(__FILE__);
@@ -14,6 +14,10 @@ defined('YII_DEBUG') or define('YII_DEBUG',true);
 defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 
 require_once($yii);
-Yii::setPathOfAlias('lib', $dir.'/lib');
 Yii::setPathOfAlias('hay', $dir.'/lib/hay');
+
+// 加载zae环境的的autoloader
+Yii::import('hay.zae.ZZaeAutoloader');
+ZZaeAutoloader::register();
+
 Yii::createWebApplication($config)->run();
